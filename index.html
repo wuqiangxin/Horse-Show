@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>小马秀</title>
+    <style>
+        /* 引入字体图标 */
+        @font-face {
+            font-family: 'icomoon';
+            src: url('fonts/icomoon.eot?k1v9d2');
+            src: url('fonts/icomoon.eot?k1v9d2#iefix') format('embedded-opentype'),
+                url('fonts/icomoon.ttf?k1v9d2') format('truetype'),
+                url('fonts/icomoon.woff?k1v9d2') format('woff'),
+                url('fonts/icomoon.svg?k1v9d2#icomoon') format('svg');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+
+        /* 清除HTML标签默认的内外边距 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+
+        input,
+        button,
+        textarea {
+            outline: none;
+        }
+
+        /* 版心 */
+        .w1100 {
+            width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* css继承性 */
+        body {
+            /* 字体系列 */
+            font-family: "Times New Roman", Arial, Helvetica, sans-serif;
+            /* 字体大小 */
+            font-size: 16px;
+        }
+
+        a {
+            color: #111;
+            /* 清除下划线 */
+            text-decoration: none;
+        }
+
+        input {
+            /* 输入框转化为块元素 */
+            display: block;
+        }
+
+        /* 后代选择器 */
+        .header ul li a {
+            /* 字体加粗 */
+            font-weight: 550;
+        }
+
+        h2 {
+            font-weight: 400;
+            font-size: 50px;
+        }
+
+        .header {
+            /* 粘性定位 */
+            position: sticky;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            /* 内边距 */
+            padding: 20px 0;
+            height: 58px;
+            background-color: #f3f6ff;
+            /* 底部边框 */
+            border-bottom: 1px solid #e3e6ee;
+        }
+
+        .header h1 {
+            /* 浮动 */
+            float: left;
+            width: 183px;
+            height: 58px;
+        }
+
+        .header h1 a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: url(images/logo.png) no-repeat;
+            font-size: 0;
+        }
+
+        .header ul {
+            /* 文字水平居右 */
+            /* text-align: right; */
+            float: right;
+            height: 58px;
+            line-height: 58px;
+        }
+
+        .header .w1100 ul li {
+            /* 转换为行内快元素
+            display: inline-block; */
+            float: left;
+        }
+
+        .header ul li .active {
+            color: #ff2c9c;
+        }
+
+        .header ul li a {
+            display: block;
+            padding: 0 15px;
+            transition: .3s;
+        }
+
+        /* 伪类选择器 */
+        .header ul li a:hover {
+            color: #ff2c9c;
+        }
+
+        .header ul li:last-child a {
+            padding-right: 0;
+        }
+
+        .dropToggle {
+            position: relative;
+        }
+
+        .dropWrap {
+            /* display是一个瞬时效果，不能用来做过渡
+            display: none; */
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 75px;
+            /* CSS3计算属性 */
+            left: calc(50% - 75px);
+            width: 150px;
+            padding: 10px 0;
+            background-color: #fff;
+            border-radius: 4px;
+            transition: .3s .25s;
+        }
+
+        .dropToggle:hover .dropWrap {
+            /* display是一个瞬时效果，不能用来做过渡
+            display: block; */
+            opacity: 1;
+            visibility: visible;
+            top: 55px;
+        }
+
+        .dropWrap a {
+            display: block;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .dropWrap .sub-active {
+            color: #ff2c9c;
+            background-color: #fff5f5;
+        }
+
+        .dropWrap a:hover {
+            background-color: #fff5f5;
+        }
+
+        .info {
+            margin-bottom: 25px;
+            color: #5c647d;
+            /* 行高 */
+            line-height: 1.65;
+        }
+
+        .title {
+            display: inline-block;
+            /* 字体颜色 */
+            color: #555;
+            margin-bottom: 30px;
+            font-weight: 600;
+            line-height: 1px;
+        }
+
+        .title::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 7px;
+            background-color: rgba(255, 44, 156, .6);
+        }
+
+        /* 类选择器 */
+        .headline {
+            margin-bottom: 45px;
+            line-height: 1.5;
+            color: #001634;
+            font-size: 36px;
+            /* 字体粗细 */
+            font-weight: 400;
+        }
+
+        .text-conts {
+            width: 540px;
+        }
+
+        .pic {
+            width: 540px;
+        }
+
+        /* 并集选择器 */
+        span,
+        .bd {
+            font-weight: 700;
+        }
+
+        /* 标签选择器 */
+        em {
+            /* 字体样式 */
+            font-style: normal;
+        }
+
+        table {
+            width: 100%;
+            text-align: center;
+            border-left: 1px solid #ff2c9c;
+            border-bottom: 1px solid #ff2c9c;
+            /* 清除单元格之间的间距 */
+            border-spacing: 0;
+        }
+
+        th,
+        td {
+            height: 40px;
+            border-top: 1px solid #ff2c9c;
+            border-right: 1px solid #ff2c9c;
+        }
+
+        th {
+            background-color: rgb(23, 255, 182);
+        }
+
+        td {
+            background-color: #f3f6ff;
+            transition: .3s;
+        }
+
+        table tbody tr:hover td {
+            color: #fff;
+            background-color: gray;
+        }
+
+        .first {
+            height: 700px;
+            background: url(images/hero-bg.png) no-repeat;
+            background-color: #f3f6ff;
+        }
+
+        .service {
+            height: 1060px;
+            background: url(images/section-shape_01.png) no-repeat right;
+            background-color: #f3f6ff;
+        }
+
+        .service .text-conts {
+            float: left;
+            width: 550px;
+            margin-top: 305px;
+        }
+
+        .service .text-conts .contents {
+            width: 470px;
+            padding-right: 80px;
+        }
+
+        .service .right-cards {
+            float: right;
+            padding-top: 130px;
+            width: 540px;
+        }
+
+        .service .cards {
+            margin-bottom: 30px;
+            padding: 50px 70px;
+            background: url(images/service-bg.png) no-repeat center;
+            background-color: #fff;
+            /* 左上角圆角 */
+            border-top-left-radius: 30px;
+            /* 盒子阴影 */
+            box-shadow: 5px 10px 30px 0px rgba(0, 11, 40, 0.15);
+            border: 1px solid transparent;
+        }
+
+        .service .cards:hover {
+            border: 1px solid #ff2c9c;
+        }
+
+        .service .cards:hover .left-pic {
+            animation: rotation .3s linear;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .service .cards .left-pic {
+            float: left;
+            margin-right: 30px;
+        }
+
+        .service .cards .right-contents {
+            float: left;
+            width: 248px;
+        }
+
+        .service .cards:hover .right-contents h4 {
+            /* 渐变色背景 */
+            background: linear-gradient(120deg, #f7a379 0%, #ff2c9c 100%);
+            /* 将背景色变成color加给文字 */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .service .cards h4 {
+            margin-bottom: 22px;
+            font-size: 24px;
+        }
+
+        .service .cards a {
+            margin-top: 35px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .service .cards a:hover {
+            color: #ff2c9c;
+        }
+
+        .more,
+        .contact .text-conts .btn {
+            /* 将a标签转化为块元素 */
+            display: block;
+            position: relative;
+            width: 204px;
+            height: 60px;
+            margin-top: 65px;
+            /* 将行高和高度一样，实现单行文本垂直居中 */
+            line-height: 60px;
+            text-align: center;
+            color: #fff;
+            background: linear-gradient(-120deg, #ff2c9c 0%, #f9a47a 100%);
+            font-weight: 600;
+            /* 会层叠掉body上面的font-family */
+            font-family: Arial;
+            /* 圆角 */
+            border-radius: 4px;
+            /* 创建层叠上下文 */
+            z-index: 0;
+        }
+
+        .more::after,
+        .contact .text-conts .btn:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background-color: #111;
+            border-radius: 4px;
+            z-index: -1;
+            /* CSS3过渡效果 */
+            transition: .3s;
+        }
+
+        /* 鼠标移入特效 */
+        .more:hover::after,
+        .contact .text-conts .btn:hover::after {
+            left: 0;
+            width: 100%;
+        }
+
+        .more:hover,
+        .contact .text-conts .btn:hover {
+            color: #fff;
+            /* background-color: #111; */
+            /* 盒子阴影 */
+            box-shadow: 2px 5px 20px 0px rgba(114, 27, 213, 0.473);
+        }
+
+        .first .text-conts {
+            float: left;
+            margin-top: 180px;
+        }
+
+        .first .text-conts h2 {
+            margin-bottom: 35px;
+        }
+
+        .first .text-conts p {
+            margin-bottom: 65px;
+        }
+
+        .first .pic {
+            float: right;
+            margin-top: 130px;
+        }
+
+        .pic img {
+            width: 100%;
+        }
+
+        .about {
+            height: 790px;
+        }
+
+        .about .pic {
+            float: left;
+            margin-top: 180px;
+        }
+
+        .about .text-conts {
+            float: right;
+            margin-top: 130px;
+        }
+
+        .about .text-conts .contents {
+            width: 470px;
+            padding-left: 80px;
+        }
+
+        .corps {
+            height: 700px;
+        }
+
+        .corps .pic {
+            float: left;
+            margin-top: 180px;
+        }
+
+        .corps .text-conts {
+            float: right;
+            margin-top: 130px;
+        }
+
+        .corps .text-conts .more {
+            margin-left: 170px;
+        }
+
+        .choose {
+            height: 755px;
+            background-color: #f3f6ff;
+        }
+
+        .choose .text-conts {
+            float: left;
+            margin-top: 130px;
+        }
+
+        .choose .text-conts .main {
+            width: 470px;
+        }
+
+        .choose .text-conts li {
+            margin-bottom: 30px;
+            height: 52px;
+        }
+
+        .choose .text-conts li img {
+            float: left;
+        }
+
+        .choose .text-conts li p {
+            float: right;
+            width: 390px;
+        }
+
+        .choose .pic {
+            float: right;
+            margin-top: 180px;
+        }
+
+        .contact {
+            height: 950px;
+            background: url(images/shape-01.png) no-repeat left;
+            background-color: #f3f6ff;
+        }
+
+        .contact .pic {
+            float: left;
+            margin-top: 300px;
+        }
+
+        .contact .pic img {
+            width: 470px;
+        }
+
+        .contact .text-conts {
+            float: right;
+            margin-top: 130px;
+        }
+
+        .contact .text-conts input {
+            width: 540px;
+            height: 54px;
+            padding-left: 20px;
+            margin-bottom: 30px;
+            border: 2px solid #e1e1e1;
+            /* CSS3盒模型 */
+            box-sizing: border-box;
+        }
+
+        /* focus伪类 */
+        .contact .text-conts input:focus,
+        .contact .text-conts textarea:focus {
+            border: 2px solid #ff2c9c;
+        }
+
+        .contact .text-conts textarea {
+            width: 540px;
+            height: 175px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            border: 2px solid #e1e1e1;
+            box-sizing: border-box;
+        }
+
+        .contact .text-conts .btn {
+            padding-left: 0;
+            border: 0;
+            font-size: 16px;
+        }
+
+        .team {
+            padding: 130px 0 100px;
+        }
+
+        .team .w1100 {
+            text-align: center;
+        }
+
+        .team ul li {
+            float: left;
+            position: relative;
+            width: 350px;
+            height: 378px;
+            margin-right: 25px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        /* CCS3结构选择器 */
+        .team ul li:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        .team ul li img {
+            width: 100%;
+            border-top-left-radius: 30px;
+        }
+
+        .team ul li::after {
+            /* display: none; */
+            content: '';
+            opacity: 0;
+            position: absolute;
+            width: 0;
+            height: 100%;
+            background-color: rgba(255, 44, 156, .9);
+            border-top-left-radius: 30px;
+            transition: .3s;
+        }
+
+        .team ul li .team-details {
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            margin-top: 50%;
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+            transition: .3s;
+        }
+
+        .team ul li:first-child .team-details,
+        .team ul li:nth-child(4) .team-details {
+            left: -30px;
+            top: -30px;
+        }
+
+        .team ul li:first-child::after,
+        .team ul li:nth-child(4)::after {
+            top: 0;
+            left: 0;
+        }
+
+        .team ul li:nth-child(2)::after {
+            left: 0;
+            width: 100%;
+            height: 0;
+        }
+
+        .team ul li:nth-child(2) .team-details {
+            left: 0px;
+            top: -60px;
+        }
+
+        .team ul li:nth-child(3n)::after {
+            right: 0;
+        }
+
+        .team ul li:nth-child(3n) .team-details {
+            right: -30px;
+            top: -30px;
+        }
+
+        .team ul li .team-details h4 {
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        .team ul li:first-child:hover .team-details,
+        .team ul li:nth-child(4):hover .team-details {
+            opacity: 1;
+            left: 0;
+        }
+
+        .team ul li:first-child:hover::after,
+        .team ul li:nth-child(4):hover::after {
+            /* display: block; */
+            opacity: 1;
+            width: 100%;
+        }
+
+        .team ul li:nth-child(2):hover .team-details {
+            opacity: 1;
+            top: -30px;
+        }
+
+        .team ul li:nth-child(2):hover::after {
+            /* display: block; */
+            opacity: 1;
+            height: 100%;
+        }
+
+        .team ul li:nth-child(3n):hover .team-details {
+            opacity: 1;
+            right: 0;
+        }
+
+        .team ul li:nth-child(3n):hover::after {
+            /* display: block; */
+            opacity: 1;
+            width: 100%;
+        }
+
+        .team ul li:nth-child(5)::after {
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 0;
+        }
+
+        .team ul li:nth-child(5) .team-details {
+            left: 0px;
+            top: 0px;
+        }
+
+        .team ul li:nth-child(5):hover .team-details {
+            opacity: 1;
+            top: -30px;
+        }
+
+        .team ul li:nth-child(5):hover::after {
+            /* display: block; */
+            opacity: 1;
+            height: 100%;
+        }
+
+        .team .socials {
+            margin-top: 25px;
+        }
+
+        .team .socials a,
+        .footer-about .methods a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            text-align: center;
+            line-height: 36px;
+            margin: 0 3px;
+            color: #fff;
+            font-family: 'icomoon';
+            font-size: 18px;
+            border: 1px solid #fff;
+            border-radius: 50%;
+        }
+
+        .team .socials a:hover {
+            background-color: #fff;
+            color: #ff2c9c;
+        }
+
+        .footer-wrapper {
+            position: relative;
+            padding-top: 100px;
+            height: 375px;
+            background-color: #f3f6ff;
+            border-top: 1px solid #e3e6ee;
+        }
+
+        .footer-wrapper::before,
+        .footer-wrapper::after {
+            position: absolute;
+            content: "";
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-repeat: no-repeat;
+            background-size: contain;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .footer-wrapper::before {
+            height: 65%;
+            background-image: url(images/shape-02-sm.png);
+            background-position: top left;
+        }
+
+        .footer-wrapper::after {
+            height: 100%;
+            background-image: url(images/shape-02.png);
+            background-position: center right;
+        }
+
+        .footer-wrapper .footer-logo {
+            float: left;
+            margin-right: 20px;
+            width: 350px;
+        }
+
+        .footer-about .logo {
+            width: 165px;
+            margin-bottom: 35px;
+        }
+
+        .footer-about p {
+            margin-bottom: 40px;
+        }
+
+        .footer-about .socials h6 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .footer-about .methods a {
+            font-size: 16px;
+            background-color: #222;
+        }
+
+        .footer-about .methods a:hover {
+            background-color: #ff2c9c;
+        }
+
+        .footer-useful {
+            float: left;
+            width: 175px;
+        }
+
+        .footer-header {
+            font-size: 24px;
+            color: #001634;
+            margin-bottom: 35px;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links li,
+        .footer-links li a {
+            color: #5c647d;
+            line-height: 1.5;
+            transition: .3s;
+        }
+
+        .footer-links li a:hover {
+            color: #ff2c9c;
+        }
+
+        .footer-contact {
+            float: left;
+            width: 260px;
+        }
+
+        .footer-gallery {
+            float: right;
+            width: 255px;
+        }
+
+        .footer-img-group div {
+            position: relative;
+            float: left;
+            width: 75px;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* .footer-img-group div span {
+            position: absolute;
+            display: none;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .3);
+        }
+
+        .footer-img-group div:hover span {
+            display: block;
+        } */
+
+        /* CSS3结构伪类选择器 */
+        .footer-img-group div:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        .footer-img-group div img {
+            width: 100%;
+        }
+
+        .footer-img-group div img:hover {
+            /* 图片明亮度 */
+            filter: brightness(0.5)
+        }
+
+        .footer-bottom {
+            padding: 27px 0;
+            background-color: #e8e3ff;
+            text-align: center;
+        }
+
+        .footer-bottom a {
+            color: #ff2c9c;
+        }
+
+        .toTop {
+            position: fixed;
+            right: 50px;
+            bottom: 50px;
+            z-index: 1;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(120deg, #ff2c9c 0%, #f9a47a 100%);
+            /* 盒子阴影 */
+            box-shadow: 2px 5px 10px rgba(0, 0, 0, .3);
+            transition: .3s;
+        }
+
+        .toTop::before,
+        .toTop::after {
+            content: '';
+            display: block;
+            opacity: 0;
+            position: absolute;
+            /* 注意这几个负值实现的效果 */
+            top: -15px;
+            left: -15px;
+            bottom: -15px;
+            right: -15px;
+            border: 2px solid #f9a47a;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .toTop a {
+            display: block;
+            height: 100%;
+            line-height: 52px;
+            font-size: 18px;
+            /* font-family: 'icomoon'; */
+            text-align: center;
+            color: #fff;
+        }
+
+        .toTop:hover {
+            transform: scale(1.3);
+        }
+
+        .toTop:hover::before,
+        .toTop:hover::after {
+            /* CSS3动画 */
+            animation: pulse 1.5s linear infinite;
+        }
+
+        .toTop:hover::after {
+            animation-delay: .5s;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0;
+                transform: scale(.5);
+            }
+
+            50% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* 伪元素实现字体图标 */
+        .toTop a::after {
+            font-family: 'icomoon';
+            content: '\e904';
+        }
+
+        /* 清除浮动 */
+        .clearfix::after {
+            content: '';
+            height: 0;
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="w1100">
+            <!-- logo模块 -->
+            <h1><a href="index.html">小马秀</a></h1>
+            <!-- 头部导航栏 start -->
+            <!-- 无序列表 -->
+            <ul>
+                <li class="dropToggle">
+                    <a class="active" href="#">Home</a>
+                    <!-- 次级导航栏 -->
+                    <div class="dropWrap">
+                        <a class="sub-active" href="#">Home 01</a>
+                        <a href="#">Home 02</a>
+                    </div>
+                </li>
+                <!-- 锚点链接 -->
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#service">Services</a></li>
+                <li><a href="#team">Our Team</a></li>
+                <li><a href="#choose">Choose Us</a></li>
+                <li><a href="#other">Other Company</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 头部导航栏 end -->
+    <!-- 第一块 start -->
+    <!-- 布局标签 -->
+    <div class="first">
+        <div class="w1100">
+            <div class="text-conts">
+                <!-- 标题标签 -->
+                <h2>Hello! we are<br> <span class="bd">Creative Agency.</span></h2>
+                <!-- 段落标签和换行标签 -->
+                <p class="info">Chap fantastic skive off chancer knees up starkers<br>easy peasyeavid bleeding the BBC
+                    tomfoolery chimney!
+                </p>
+                <!-- 链接标签 -->
+                <a class="more" href="#">Explore Features</a>
+            </div>
+            <div class="pic">
+                <!-- 图像标签和路径 -->
+                <img src="images/pic1.png" alt="Creative Agency" title="Creative Agency">
+            </div>
+        </div>
+    </div>
+    <!-- 第一块 end -->
+
+    <!-- 关于我们模块 start -->
+    <!-- 布局标签 -->
+    <div id="about" class="about">
+        <div class="w1100">
+            <div class="pic">
+                <!-- 图像标签和路径 -->
+                <img src="images/about.png" alt="Creative Agency" title="Creative Agency">
+            </div>
+            <div class="text-conts">
+                <div class="contents">
+                    <!-- 段落标签 -->
+                    <p class="title">About Us</p>
+                    <!-- 标题标签和布局标签 -->
+                    <h3 class="headline">We are creative agency providing all time best <br><span>service last 25
+                            year</span></h3>
+                    <!-- 段落标签和换行标签 -->
+                    <p class="info">It is a long established fact that a reader will distracteid by the readable at its
+                        layout.</p>
+
+                    <!-- 段落标签和特殊字符 -->
+                    <p class="info">Contrary to popular belief,&nbsp;&nbsp;&nbsp;&nbsp; lorem ipsum is not sirandom
+                        text.It has roots in a piece of classical latin literatu from making it over <em>2000 years
+                            old</em>.</p>
+
+                    <!-- 链接标签 -->
+                    <a class="more" href="#">Discover More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 关于我们模块 end -->
+    <!-- 我们的服务模块 start -->
+    <div id="service" class="service">
+        <div class="w1100">
+            <div class="text-conts">
+                <div class="contents">
+                    <!-- 段落标签 -->
+                    <p class="title">Ours Services</p>
+                    <!-- 标题标签和布局标签 -->
+                    <h3 class="headline">We provide best services that <span>people love</span></h3>
+                    <!-- 段落标签和换行标签 -->
+                    <p class="info">It is a long established fact that a reader will distracteid by the readable at its
+                        layout.
+                    </p>
+                    <!-- 段落标签和特殊字符 -->
+                    <p class="info">Contrary to popular belief,&nbsp;&nbsp;&nbsp;&nbsp; lorem ipsum is not sirandom
+                        text.
+                        It
+                        has
+                        roots in a piece
+                        of classical latin
+                        literatu from making it over <em>2000 years old</em>.</p>
+                    <!-- 链接标签 -->
+                    <a class="more" href="#">Discover More</a>
+                </div>
+            </div>
+            <div class="right-cards">
+                <div class="cards clearfix">
+                    <div class="left-pic">
+                        <img src="images/item_01.png" alt="">
+                    </div>
+                    <div class="right-contents">
+                        <h4>Creative Design</h4>
+                        <p class="info">It`s possible to simultaneously manage and transform.</p>
+                        <a href="#">Learn More</a>
+                    </div>
+                </div>
+                <div class="cards clearfix">
+                    <div class="left-pic">
+                        <img src="images/item_02.png" alt="">
+                    </div>
+                    <div class="right-contents">
+                        <h4>Digital Marketing</h4>
+                        <p class="info">Our key information from one server to another.</p>
+                        <a href="#">Learn More</a>
+                    </div>
+                </div>
+                <div class="cards clearfix">
+                    <div class="left-pic">
+                        <img src="images/item_03.png" alt="">
+                    </div>
+                    <div class="right-contents">
+                        <h4>Business Consulting</h4>
+                        <p class="info">We propose feasible & practical plans for successfully.</p>
+                        <a href="#">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 我们的服务模块 end -->
+    <!-- 我们的团队模块 start -->
+    <div id="team" class="team">
+        <div class="w1100">
+            <p class="title">OUR TEAM</p>
+            <div class="team-list">
+                <ul class="clearfix">
+                    <li>
+                        <img src="images/team1.png" alt="">
+                        <div class="team-details">
+                            <h4>Maria Ocompus</h4>
+                            <p>Marketing Head</p>
+                            <div class="socials">
+                                <a href="#"></a>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="images/team2.png" alt="">
+                        <div class="team-details">
+                            <h4>Alia Vatth</h4>
+                            <p>Management Head</p>
+                            <div class="socials">
+                                <a href="#"></a>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="images/team3.png" alt="">
+                        <div class="team-details">
+                            <h4>Alex Smithan</h4>
+                            <p>Chief People Officer</p>
+                            <div class="socials">
+                                <a href="#"></a>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="images/team4.png" alt="">
+                        <div class="team-details">
+                            <h4>Priyanka Khour</h4>
+                            <p>Office Head</p>
+                            <div class="socials">
+                                <a href="#"></a>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="images/team5.png" alt="">
+                        <div class="team-details">
+                            <h4>Sultana Sunsiya</h4>
+                            <p>Web Designer</p>
+                            <div class="socials">
+                                <a href="#"></a>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="images/team6.png" alt="">
+                        <div class="team-details">
+                            <h4>Maggie Strickland</h4>
+                            <p>Financial Services</p>
+                            <div class="socials">
+                                <a href="#"></a>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 我们的团队模块 end -->
+    <!-- 选择我们模块 start -->
+    <div id="choose" class="choose">
+        <div class="w1100">
+            <div class="text-conts">
+                <div class="main">
+                    <p class="title">Why Choose Us</p>
+                    <h3 class="headline">We are providing all time best <span>creative services</span></h3>
+                    <!-- 无序列表 -->
+                    <ul>
+                        <li>
+                            <img src="images/text-item_01.png" alt="">
+                            <p class="info">It es a long established fact that a redistracted by the readable its
+                                layout.</p>
+                        </li>
+                        <li>
+                            <img src="images/text-item_02.png" alt="">
+                            <p class="info">Culpa eos iure distinctio aspernatur itaque adipisci adipisci alias modi
+                                nemo.</p>
+                        </li>
+                        <li>
+                            <img src="images/text-item_03.png" alt="">
+                            <p class="info">Totam ad tempora unde optio ecusandae enim esse qui pariatur dicta omnis
+                                placeat?</p>
+                        </li>
+                        <li>
+                            <img src="images/text-item_04.png" alt="">
+                            <p class="info">Established enim esse iusto explicabo ea consequatur itaque cupiditate
+                                minima!</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pic">
+                <img src="images/pic3.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- 选择我们模块 end -->
+    <!-- 其他公司模块 start -->
+    <div id="other" class="corps">
+        <div class="w1100">
+            <div class="pic">
+                <img src="images/pic2.png" alt="">
+            </div>
+            <div class="text-conts">
+                <p class="title">Other Company</p>
+                <!-- 表格标签 -->
+                <table>
+                    <!-- 表结构标签 -->
+                    <thead>
+                        <tr>
+                            <!-- 表头单元格 -->
+                            <th>Company</th>
+                            <th>Contact</th>
+                            <th>Country</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Apple</td>
+                            <td>Tim Cook</td>
+                            <td>USA</td>
+                            <td>1976</td>
+                        </tr>
+                        <tr>
+                            <td>Baidu</td>
+                            <td>Li YanHong</td>
+                            <td>China</td>
+                            <td>2000</td>
+                        </tr>
+                        <tr>
+                            <td>Google</td>
+                            <td>Larry Page</td>
+                            <td>USA</td>
+                            <td>1998</td>
+                        </tr>
+                        <tr>
+                            <td>Lenovo</td>
+                            <td>Liu ChuanZhi</td>
+                            <td>China</td>
+                            <td>1984</td>
+                        </tr>
+                        <tr>
+                            <td>Microsoft</td>
+                            <td>Bill Gates</td>
+                            <td>USA</td>
+                            <td>1975</td>
+                        </tr>
+                        <tr>
+                            <td>Nokia</td>
+                            <td>Stephen Elop</td>
+                            <td>Finland</td>
+                            <td>1865</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a class="more" href="#">Discover More</a>
+            </div>
+        </div>
+    </div>
+    <!-- 其他公司模块 end -->
+    <!-- 联系我们模块 start -->
+    <div id="contact" class="contact">
+        <div class="w1100">
+            <div class="pic">
+                <img src="images/pic4.png" alt="">
+            </div>
+            <div class="text-conts">
+                <p class="title">Contact Us</p>
+                <h3 class="headline">Let`s talk<br><span>contact with us</span></h3>
+                <!-- 表单标签 -->
+                <form action="" method="" name="">
+                    <!-- 文本输入框 -->
+                    <input type="text" placeholder="Your Name">
+                    <input type="text" placeholder="Your Email">
+                    <!-- 文本域 -->
+                    <textarea placeholder="Message*"></textarea>
+                    <!-- 提交按钮 -->
+                    <!-- input提交按钮没办法设置before/after伪类 -->
+                    <!-- <input class="btn" type="submit" value="Send Message"> -->
+                    <button class="btn" type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 联系我们模块 end -->
+    <!-- 底部模块 start -->
+    <div class="footer-wrapper">
+        <div class="w1100">
+            <div class="footer-logo">
+                <div class="footer-about">
+                    <img class="logo" src="images/logo.png" alt="creatopo">
+                    <p class="info">Maboriosam in a nesciung eget magnaei dapibus disting tloctio in the find it persos
+                        montant
+                        odiy.</p>
+                    <div class="socials">
+                        <h6>Follow Us</h6>
+                        <div class="methods">
+                            <a href="#"></a>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-useful">
+                <h4 class="footer-header">Useful Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Services</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Testimonial</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 class="footer-header">Contact</h4>
+                <ul class="footer-links">
+                    <li>2005 Stokes Isle Apt. 896, Venaville 10010, USA</li>
+                    <li>(+68) 120034509</li>
+                    <li>
+                        <a href="#">creatopo@email.com</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-gallery">
+                <h4 class="footer-header">Gallery</h4>
+                <div class="footer-img-group">
+                    <div>
+                        <a href="#"><img src="images/1.png" alt=""></a>
+                        <!-- <span></span> -->
+                    </div>
+                    <div>
+                        <a href="#"><img src="images/2.png" alt=""></a>
+                        <!-- <span></span> -->
+                    </div>
+                    <div>
+                        <a href="#"><img src="images/3.png" alt=""></a>
+                        <!-- <span></span> -->
+                    </div>
+                    <div>
+                        <a href="#"><img src="images/4.png" alt=""></a>
+                        <!-- <span></span> -->
+                    </div>
+                    <div>
+                        <a href="#"><img src="images/5.png" alt=""></a>
+                        <!-- <span></span> -->
+                    </div>
+                    <div>
+                        <a href="#"><img src="images/6.png" alt=""></a>
+                        <!-- <span></span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p class="copyright-text">
+            &copy; 2020 All Right Reserved, <a href="#" target="_blank">TheUXLab</a>
+        </p>
+    </div>
+    <!-- 底部模块 end -->
+    <!-- 返回顶部可以直接通过href="#top"来实现 -->
+    <!-- <div class="toTop"><a href="#top"></a></div> -->
+    <div class="toTop"><a href="#top"></a></div>
+</body>
+
+</html>
